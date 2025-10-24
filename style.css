@@ -1,0 +1,291 @@
+:root {
+    --neon: #00ffff;
+}
+
+
+/* اللون الافتراضي عند التحميل */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f0f1f;
+    overflow: hidden;
+    position: relative;
+    cursor: crosshair;
+}
+
+
+/* فيديو الخلفية */
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.4;
+}
+
+
+/* خطوط Neon */
+
+.lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(45deg, rgba(0, 255, 255, 0.05) 0 1px, transparent 1px 20px);
+    animation: moveLines 10s linear infinite;
+    z-index: 0;
+}
+
+@keyframes moveLines {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100px 100px;
+    }
+}
+
+
+/* نقاط Neon */
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--neon);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: floatParticles linear infinite;
+}
+
+@keyframes floatParticles {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-600px) translateX(50px);
+        opacity: 0;
+    }
+}
+
+
+/* لوحة اختيار الألوان */
+
+.color-picker {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.color-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.color-btn:hover {
+    transform: scale(1.2);
+}
+
+
+/* البروفايل Neon */
+
+.profile-card {
+    position: relative;
+    background: rgba(15, 15, 30, 0.85);
+    border-radius: 30px;
+    padding: 60px 50px;
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 0 30px var(--neon), 0 0 70px var(--neon) inset;
+    z-index: 1;
+    overflow: hidden;
+    border: 2px solid var(--neon);
+    animation: pulseNeon 2s infinite alternate;
+}
+
+
+/* تأثير إخفاء وإظهار البروفايل بسلاسة */
+
+.profile-card {
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+@keyframes pulseNeon {
+    0% {
+        box-shadow: 0 0 20px var(--neon), 0 0 50px var(--neon) inset;
+    }
+    100% {
+        box-shadow: 0 0 40px var(--neon), 0 0 80px var(--neon) inset;
+    }
+}
+
+.profile-card h1 {
+    font-size: clamp(24px, 5vw, 32px);
+    margin-bottom: 10px;
+    color: var(--neon);
+    text-shadow: 0 0 10px var(--neon), 0 0 25px var(--neon);
+}
+
+.profile-card p {
+    font-size: clamp(14px, 3.5vw, 18px);
+    color: #ccc;
+    margin-bottom: 25px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: var(--neon);
+    border: 2px solid var(--neon);
+    margin: 5px;
+    padding: 14px 22px;
+    border-radius: 15px;
+    display: inline-block;
+    font-weight: bold;
+    transition: 0.4s;
+    box-shadow: 0 0 5px var(--neon), 0 0 15px var(--neon) inset;
+    font-size: clamp(16px, 4vw, 20px);
+}
+
+.social-links a:hover {
+    background: var(--neon);
+    color: #0f0f1f;
+    transform: scale(1.15);
+    box-shadow: 0 0 35px var(--neon), 0 0 70px var(--neon) inset;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.7s;
+}
+
+.stat.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat h2 {
+    color: var(--neon);
+    font-size: clamp(18px, 5vw, 26px);
+    margin-bottom: 5px;
+    text-shadow: 0 0 12px var(--neon), 0 0 25px var(--neon);
+}
+
+.stat p {
+    font-size: clamp(14px, 3.5vw, 16px);
+    color: #ccc;
+}
+
+.profile-card .avatar-container {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.profile-card img {
+    width: 25vw;
+    max-width: 180px;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 4px solid var(--neon);
+    transition: transform 0.5s, box-shadow 0.5s, border-color 0.5s;
+}
+
+.profile-card img:hover {
+    transform: rotate(15deg) scale(1.15);
+    box-shadow: 0 0 50px var(--neon), 0 0 100px var(--neon) inset;
+}
+
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    transform: translate(-50%, -50%);
+    border: 3px solid var(--neon);
+    border-radius: 50%;
+    animation: rotateRing 6s linear infinite;
+    opacity: 0.6;
+    box-shadow: 0 0 25px var(--neon), 0 0 50px var(--neon) inset;
+}
+
+.ring:nth-child(2) {
+    width: 135%;
+    height: 135%;
+    animation-duration: 8s;
+    opacity: 0.4;
+}
+
+.ring:nth-child(3) {
+    width: 150%;
+    height: 150%;
+    animation-duration: 10s;
+    opacity: 0.3;
+}
+
+@keyframes rotateRing {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.trail {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--neon);
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 15px var(--neon), 0 0 25px var(--neon) inset;
+    opacity: 0.7;
+    transition: transform 0.05s;
+}

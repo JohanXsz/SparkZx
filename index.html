@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بروفايل Neon احترافي</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .controls {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 9999;
+        }
+        
+        .controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: #0ff;
+            border: 1px solid #0ff;
+            border-radius: 8px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .controls button:hover {
+            background: rgba(0, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- فيديو الخلفية -->
+    <video autoplay muted loop playsinline id="bg-video">
+    <source src="d:\Download Google\abdel\Downloads\THIS IS 4K ANIME (Satoru Gojo).mp4" type="video/mp4">
+    المتصفح لا يدعم الفيديو.
+  </video>
+
+    <!-- أزرار التحكم -->
+    <div class="controls">
+        <button id="play-sound">🎵 تشغيل الصوت</button>
+        <button id="toggle-sound">🔇 كتم / تشغيل الصوت</button>
+        <button id="toggle-profile">👁️ إخفاء / إظهار البروفايل</button>
+    </div>
+
+    <div class="lines"></div>
+    <div class="particles" id="particles"></div>
+    <div class="trail" id="trail"></div>
+
+    <!-- لوحة ألوان يدوية -->
+    <div class="color-picker">
+        <button class="color-btn" style="background:#00ffff;" data-color="#00ffff"></button>
+        <button class="color-btn" style="background:#ffffff;" data-color="#ffffff"></button>
+        <button class="color-btn" style="background:#00ff00;" data-color="#00ff00"></button>
+        <button class="color-btn" style="background:#ff9900;" data-color="#ff9900"></button>
+        <button class="color-btn" style="background:#ff0000;" data-color="#ff0000"></button>
+    </div>
+
+    <div class="profile-card">
+        <div class="avatar-container">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <img id="avatar" src="https://yt3.googleusercontent.com/aArGWJimrBwILaA9HRIrplECIL0onPu_gAeH_BkTc9BmgVjT63zhYHpDe0MhZNv8abYPUehtMfE=s160-c-k-c0x00ffffff-no-rj" alt="Profile Picture">
+        </div>
+
+        <h1 id="username">SparkZx</h1>
+        <p id="bio">I'm SparkZx A Content Creator</p>
+
+        <div class="social-links" id="socials">
+            <a href="https://www.instagram.com/spark.9x" target="_blank">Instagram</a>
+            <a href="https://kick.com/sparkzxx" target="_blank">Kick</a>
+            <a href="https://www.facebook.com/profile.php?id=100083498109187" target="_blank">facebook</a>
+            <a href="https://www.youtube.com/@big3ssila" target="_blank">YouTube</a>
+        </div>
+
+        <div class="stats" id="stats">
+            <div class="stat" data-target="15">
+                <h2>0</h2>
+                <p>Total games</p>
+            </div>
+            <div class="stat" data-target="0">
+                <h2>0</h2>
+                <p>نقاط</p>
+            </div>
+            <div class="stat" data-target="20000">
+                <h2>0</h2>
+                <p>Total Followers</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- سكريبت التحكم -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('bg-video');
+            const playBtn = document.getElementById('play-sound');
+            const toggleSoundBtn = document.getElementById('toggle-sound');
+            const toggleProfileBtn = document.getElementById('toggle-profile');
+            const profileCard = document.querySelector('.profile-card');
+
+            // 🎵 زر تشغيل الصوت
+            playBtn.addEventListener('click', async() => {
+                try {
+                    video.muted = false;
+                    await video.play();
+                    playBtn.textContent = "✅ الصوت يعمل الآن";
+                } catch (err) {
+                    console.warn("تعذر تشغيل الفيديو بالصوت:", err);
+                    playBtn.textContent = "⚠️ لم يمكن تشغيل الصوت (قد يكون الفيديو صامتاً)";
+                }
+            });
+
+            // 🔇 زر كتم وتشغيل الصوت
+            toggleSoundBtn.addEventListener('click', () => {
+                video.muted = !video.muted;
+                toggleSoundBtn.textContent = video.muted ? "🔇 الصوت مكتوم" : "🔊 الصوت يعمل";
+                if (!video.muted) video.play().catch(() => {});
+            });
+
+            // 👁️ زر إخفاء / إظهار البروفايل
+            toggleProfileBtn.addEventListener('click', () => {
+                if (profileCard.style.visibility === 'hidden') {
+                    // إظهار كامل المربع ومحتواه
+                    profileCard.style.visibility = 'visible';
+                    profileCard.style.opacity = '1';
+                    profileCard.style.pointerEvents = 'auto';
+                    toggleProfileBtn.textContent = '👁️ إخفاء البروفايل';
+                } else {
+                    // إخفاء كامل المربع وما بداخله
+                    profileCard.style.visibility = 'hidden';
+                    profileCard.style.opacity = '0';
+                    profileCard.style.pointerEvents = 'none';
+                    toggleProfileBtn.textContent = '👁️ إظهار البروفايل';
+                }
+            });
+        });
+    </script>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
